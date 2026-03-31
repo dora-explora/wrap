@@ -1,4 +1,5 @@
-use std::io::Result;
+use std::io::{Read, Result};
+use std::fs::File;
 
 use ratatui::{
     DefaultTerminal, Frame,
@@ -6,6 +7,10 @@ use ratatui::{
     widgets::Block
 };
 use crossterm::event;
+
+mod parser;
+mod sim;
+mod display;
 
 const LOGO: &str =
 " _  _  ____   __   ____        _  _  ____   __
@@ -31,7 +36,12 @@ const LOGO: &str =
 
 fn main() -> color_eyre::Result<()> {
     color_eyre::install()?;
-    ratatui::run(app)?;
+    let mut file = File::open("programs/default.wrapcode")?;
+    let mut filestring = String::new();
+    file.read_to_string(&mut filestring)?;
+    let core: Vec<sim::Operation> = parser::parse(filestring).unwrap();
+    println!("{}", core[0]);
+    // ratatui::run(app)?;
     return Ok(());
 }
 
@@ -45,7 +55,7 @@ fn app(terminal: &mut DefaultTerminal) -> Result<()> {
 }
 
 fn render(frame: &mut Frame) {
-    let text = Text::raw(String::from(LOGO));
+    let text = Text::raw(LOGO.to_string());
     let block = Block::bordered();
     let outer_area = frame.area();
     let inner_area = block.inner(outer_area);
