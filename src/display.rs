@@ -74,6 +74,7 @@ impl Display for Token {
             Token::CloseBracket => write!(f, "CloseBracket"),
             Token::Comma => write!(f, "Comma"),
             Token::Semicolon => write!(f, "Semicolon"),
+            Token::Newline => write!(f, "Newline"),
         }
     }
 }

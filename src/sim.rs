@@ -1,29 +1,11 @@
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Instruction {
-    MOV,
-    ADD,
-    SUB,
-    MUL,
-    DIV,
-    MOD,
-    JMP,
-    SEQ,
-    SNE,
-    SLT,
-    SGT,
-    PRN,
-    RET,
-    NOP
+    MOV, ADD, SUB, MUL, DIV, MOD, JMP, SEQ, SNE, SLT, SGT, PRN, RET, NOP
 }
 
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Specifier {
-    N,
-    A,
-    B,
-    C,
-    O,
-    W,
+    N, A, B, C, O, W
 }
 
 #[derive(Debug)]
